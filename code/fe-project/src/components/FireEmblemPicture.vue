@@ -1,8 +1,8 @@
 <template>
 
-  <img v-if="!showUnit" v-bind:src="unitImage" class="brightness-0 h-[200px]" alt="pokemon"/>
+  <img v-if="!showUnit" v-bind:src="unitImage" class="brightness-0 h-[200px]" alt="unit"/>
 
-  <img v-else v-bind:src="unitImage" class="fade-in h-[200px]" alt="pokemon"/>
+  <img v-else v-bind:src="unitImage" class="fade-in h-[200px]" alt="unit"/>
 
 </template>
 
@@ -17,7 +17,7 @@ import { computed, ref } from 'vue';
   });
 
   const unitImage = computed(() =>
-    `link here`
+    `../../images/${props.unitName}.png`
   );
 
 </script>
