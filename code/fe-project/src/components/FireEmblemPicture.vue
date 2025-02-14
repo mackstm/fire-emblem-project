@@ -19,6 +19,7 @@ import { computed, ref } from 'vue';
   const unitImage = computed(() =>
     `../../images/${props.unitName}.png`
   );
+  console.log(props.unitName);
 
 </script>
 

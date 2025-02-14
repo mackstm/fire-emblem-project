@@ -1,7 +1,7 @@
 <template>
   <section v-if="isLoading">
     <h1 class="text-3xl">Espere por favor</h1>
-    <h3 class="animate-pulse">Cargando Pokémons</h3>
+    <h3 class="animate-pulse">Cargando personajes</h3>
   </section>
   <section v-else>
     <h1>Adivinar personaje de Fire Emblem: The Sacred Stones</h1>
@@ -10,16 +10,26 @@
       {{ gameStatus === GameStatus.Playing ? 'Adivina el personaje' : 'Intentalo de nuevo en: ' + restartCounter }}
     </h3>
 
-    <FireEmblemPicture :unitName="randomUnit.Name.toLowerCase()" :showUnit="gameStatus !== GameStatus.Playing"/>
+    <FireEmblemPicture :unitName="randomUnit.Name.toLowerCase()"
+    :showUnit="gameStatus !== GameStatus.Playing"/>
 
     <form @submit.prevent="sendAnswer">
-      <input type="text" v-model="guess" placeholder="Adivina!"/>
-      <button type="submit">Adivina!</button>
+      <input v-if="gameStatus != GameStatus.Playing" v-model="guess" type="text"  placeholder="Adivina!" disabled />
+      <input v-else type="text" v-model="guess" placeholder="Adivina!" />
+      <button type="submit" :disabled="gameStatus !== GameStatus.Playing">Adivina!</button>
     </form>
 
 
     <div class="text-sm mt-2">
       Victorias: {{ winCount }}
+    </div>
+
+    <div class="text">
+      <ul>
+        <li v-for="item in cluesARR">
+          {{ item }}
+        </li>
+      </ul>
     </div>
 
   </section>
@@ -35,13 +45,14 @@ const guess = ref('');
 
 const sendAnswer = () => {
   checkAnswer(guess.value);
+  guess.value = "";
 }
 
 const { gameStatus,
     isLoading,
     randomUnit,
     winCount,
-    restartCounter,
+    restartCounter, cluesARR,
     checkAnswer } = useFireEmblemGame();
 
 </script>
