@@ -10,6 +10,9 @@
       {{ gameStatus === GameStatus.Playing ? 'Adivina el personaje' : 'Intentalo de nuevo en: ' + restartCounter }}
     </h3>
 
+    <h3 class="mt-2" v-if="gameStatus !== GameStatus.Playing">
+      {{ randomUnit.Name.toLocaleUpperCase()}}
+    </h3>
     <FireEmblemPicture :unitName="randomUnit.Name.toLowerCase()"
     :showUnit="gameStatus !== GameStatus.Playing"/>
 
