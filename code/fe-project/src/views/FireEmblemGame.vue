@@ -6,8 +6,8 @@
   <section v-else>
     <h1>Adivinar personaje de Fire Emblem: The Sacred Stones</h1>
 
-    <div class="flex w-[65%] justify-between">
-      <div class="flex flex-col items-start">
+    <div class="md:flex w-[65%] justify-between">
+      <div class="md:flex flex-col items-start">
         <h3 class="mt-2">
           {{ gameStatus === GameStatus.Playing ? 'Adivina el personaje' : 'Intentalo de nuevo en: ' + restartCounter }}
         </h3>
@@ -30,11 +30,13 @@
           ></v-btn>
         </form>
 
-      </div>
-      <div class="flex flex-col items-end">
         <div class="text-sm mt-2">
           Victorias: {{ winCount }}
         </div>
+
+      </div>
+      <div class="md:flexflex-col">
+
 
         <div class="text">
           <ul>
@@ -75,7 +77,6 @@ import { ref } from 'vue';
  * The user's input for guessing the Fire Emblem character.
  */
 const guess = ref('');
-const example = ref(50);
 
 const calcStatForBar = (stat: string[]) => {
   if (stat[0] == 'HP') {

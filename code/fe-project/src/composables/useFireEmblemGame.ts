@@ -144,12 +144,12 @@ export function useFireEmblemGame() {
   const selectClue = () => {
     switch (cluesCounter.value) {
       case 1:
-        cluesARR.value.push(randomUnit.value.Affin);
+        cluesARR.value.push("Afinidad: " + randomUnit.value.Affin);
         break;
       case 2:
         let statsArr: string[] = [];
         statsArr.push("HP: " + randomUnit.value.HP);
-        statsArr.push("STR: " + randomUnit.value.Str);
+        statsArr.push("ATK: " + randomUnit.value.Str);
         statsArr.push("SKL: " + randomUnit.value.Skl);
         statsArr.push("SPD: " + randomUnit.value.Spd);
         statsArr.push("LCK: " + randomUnit.value.Lck);
@@ -159,13 +159,13 @@ export function useFireEmblemGame() {
         cluesARR.value.push(statsArr.join(";"));
         break;
       case 3:
-        cluesARR.value.push(randomUnit.value.Mov.toString());
+        cluesARR.value.push("Movimiento: " + randomUnit.value.Mov.toString());
         break;
       case 4:
         cluesARR.value.push("LVL: " + randomUnit.value.Lv);
         break;
       case 5:
-        cluesARR.value.push(randomUnit.value.Class);
+        cluesARR.value.push("Clase: " + randomUnit.value.Class);
         break;
       default:
         break;
