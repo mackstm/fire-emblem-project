@@ -1,8 +1,8 @@
 <template>
 
-  <img v-if="!showUnit" v-bind:src="unitImage" class="brightness-0 h-[500px]" alt="unit"/>
+  <img v-if="!showUnit" v-bind:src="unitImage" class="brightness-0 h-[400px]" alt="unit"/>
 
-  <img v-else v-bind:src="unitImage" class="fade-in h-[500px]" alt="unit"/>
+  <img v-else v-bind:src="unitImage" class="fade-in h-[400px]" alt="unit"/>
 
 </template>
 

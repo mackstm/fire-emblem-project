@@ -7,18 +7,23 @@
     <img class="mt-4 md:mt-0" src="../../images/assets/fe8-logo.png" alt="logo" >
 
     <div class="mt-2 mb-2" v-if="gameStatus === GameStatus.Playing">
-      <v-progress-linear color="purple" v-model="errorCounter"
-          
-            :buffer-value="calcErrorsForBar()">
-        
+      <v-progress-linear
+      color="success"
+      :model-value="calcErrorsForBar()"
+      size="50"
+      width="20"
+      height="20"
+      striped
+      >
+
       </v-progress-linear>
-      
+
     </div>
       <h3 class="mt-2 font-bold text-[20px] mb-2" v-else>
-      {{ gameStatus !== GameStatus.Playing && 'INTÉNTALO DE NUEVO: ' + restartCounter }}
-    </h3>
+       'INTÉNTALO DE NUEVO: ' + restartCounter
+      </h3>
 
-    <div class="flex md:flex-row w-[45%] flex-wrap justify-evenly items-center">
+    <div class="flex md:flex-row w-[40%] flex-wrap justify-evenly items-center">
       <div class="flex flex-col items-center order-first">
 
 
@@ -148,7 +153,7 @@ const calcStatForBar = (stat: string[]) => {
 }
 
 const calcErrorsForBar = () => {
-  return parseInt(errorCounter * 100 / 8);
+  return errorCounter.value * 100 / 8;
 }
 
 /**
