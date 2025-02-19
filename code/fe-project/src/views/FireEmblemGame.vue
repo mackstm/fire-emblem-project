@@ -21,8 +21,8 @@
 
         <form @submit.prevent="sendAnswer">
           <input v-if="gameStatus != GameStatus.Playing" v-model="guess" type="text"  placeholder="Adivina!" disabled />
-          <input v-else type="text" v-model="guess" placeholder="Adivina!" />
-          <button type="submit" :disabled="gameStatus !== GameStatus.Playing">Adivina!</button>
+          <input v-else type="text" v-model="guess" placeholder="Escribe aquí" />
+          <v-btn color="success" type="submit" :disabled="gameStatus !== GameStatus.Playing">Adivina!</v-btn>
         </form>
 
       </div>
