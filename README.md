@@ -14,6 +14,7 @@
 - [Documentación de VueDocGen](#documentación-de-vuedocgen)
 
 
+
 ## Descripción del Proyecto
 
 El proyecto será un juego de adivinar los personajes del videojuego Fire Emblem: The Sacred Stones. Para ello no solo impleemntaremos el propio juego si no un sistema de pistas y un limite de errores permitidos para hacer una aplicación más completa. 
@@ -38,6 +39,22 @@ Tras esto, para poder ejecutarlo, únicamente debemos de introducir este comando
 npm run
 ```
 
+Para hacer comprobaciones con ESLint, lo ejecutamos con:
+```code
+npx eslint .
+```
+
+De cara a la aplicación multiplataforma de Electron:
+
+```code
+npm run electron:build
+```
+
+Y finalmente, para abrir el ejecutable generado:
+
+```code
+./dist/feapp-0.0.0.AppImage
+```
 
 ## Documentación de VueDocGen
 
