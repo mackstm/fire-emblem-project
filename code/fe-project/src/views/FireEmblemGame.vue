@@ -11,7 +11,7 @@
     </h3>
 
     <h3 class="mt-2" v-if="gameStatus !== GameStatus.Playing">
-      {{ 
+      {{
         randomUnit.Name.toLocaleUpperCase()}}
     </h3>
     <FireEmblemPicture :unitName="randomUnit.Name.toLowerCase()"
@@ -61,7 +61,7 @@ const sendAnswer = () => {
 /**
  * Destructured properties from the Fire Emblem game composable.
  */
-const { 
+const {
   /** The current status of the game (e.g., playing, won, lost). */
   gameStatus,
 
@@ -81,7 +81,7 @@ const {
   cluesARR,
 
   /** Function to check if the player's guess is correct. */
-  checkAnswer 
+  checkAnswer
 } = useFireEmblemGame();
 </script>
 

@@ -63,13 +63,13 @@ export function useFireEmblemGame() {
    */
   const randomUnit = computed(() => {
     if (unitList.value[randomIndex.value].Name.match(/[’]/)) {
-      let helpMe: string[] = unitList.value[randomIndex.value].Name.split("’");
+      const aux: string[] = unitList.value[randomIndex.value].Name.split("’");
       let newName = "";
-      for (let i = 0; i < helpMe.length; i++) {
-        if (i == helpMe.length - 1) {
-          newName += helpMe[i];
+      for (let i = 0; i < aux.length; i++) {
+        if (i == aux.length - 1) {
+          newName += aux[i];
         } else {
-          newName += helpMe[i] + "'";
+          newName += aux[i] + "'";
         }
       }
       unitList.value[randomIndex.value].Name = newName;
@@ -156,7 +156,7 @@ export function useFireEmblemGame() {
         statsArr.push("DEF: " + randomUnit.value.Def);
         statsArr.push("RES: " + randomUnit.value.Res);
         statsArr.push("CON: " + randomUnit.value.Con);
-        cluesARR.value.push(JSON.stringify(statsArr));
+        cluesARR.value.push(statsArr.join("\n"));
         break;
       case 3:
         cluesARR.value.push(randomUnit.value.Mov.toString());

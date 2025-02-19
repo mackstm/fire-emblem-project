@@ -9,7 +9,7 @@ const fireEmblemApi = {
 
 /**
  * Fetches Fire Emblem unit data from the API.
- * 
+ *
  * @template T - The expected response data type.
  * @returns {Promise<T | undefined>} A promise resolving to the API response or undefined if an error occurs.
  */
