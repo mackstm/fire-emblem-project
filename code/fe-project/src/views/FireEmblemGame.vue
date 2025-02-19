@@ -9,11 +9,11 @@
           {{ gameStatus === GameStatus.Playing ? 'JUGANDO...' : 'INTÉNTALO DE NUEVO: ' + restartCounter }}
     </h3>
 
-    <div class="md:flex md:flex-row w-[65%] justify-evenly items-center">
-      <div class="flex flex-col items-center">
+    <div class="flex md:flex-row w-[45%] flex-wrap justify-evenly items-center">
+      <div class="flex flex-col items-center order-first">
 
 
-          <h3 class="mb-3 font-bold text-[25px] my-outline" v-if="gameStatus !== GameStatus.Playing">
+          <h3 class="mb-3 font-bold text-[25px] my-outline order-1" v-if="gameStatus !== GameStatus.Playing">
           <span v-if="gameStatus == GameStatus.Won" class="text-green-500">
             {{
               randomUnit.Name.toLocaleUpperCase()
@@ -36,7 +36,7 @@
       </div>
 
 
-      <v-card class="bg-black mb-4 md:h-[38rem]" elevation="16" min-width="300" max-width="400" >
+      <v-card class="bg-black mb-4 md:h-[38rem] xs:max-md:order-last" elevation="16" min-width="300" max-width="400" >
         <v-card-item>
           <v-card-title> Pistas </v-card-title>
           <v-card-subtitle> Acerca del personaje... </v-card-subtitle>
@@ -68,13 +68,10 @@
         </v-card-text>
       </v-card>
 
-
-
-    </div>
-
-    <div class="text-sm mb-2 font-bold">
+      <div class="text-center md:order-none xs:max-md:order-2">
+      <div class="text-sm mb-2 font-bold">
       VICTORIAS: {{ winCount }}
-    </div>
+      </div>
 
       <form class="flex flex-row justify-center items-center" @submit.prevent="sendAnswer">
           <!-- <input class="bg-white h-[10px]" v-if="gameStatus != GameStatus.Playing"type="text"  placeholder="Escribe aquí" disabled />
@@ -107,6 +104,12 @@
             :active="gameStatus == GameStatus.Playing"
           ></v-btn>
         </form>
+    </div>
+
+    </div>
+
+
+
 
 
 
@@ -125,6 +128,7 @@ import { ref } from 'vue';
  * The user's input for guessing the Fire Emblem character.
  */
 const guess = ref('');
+
 
 const calcStatForBar = (stat: string[]) => {
   if (stat[0] == 'VIDA') {
