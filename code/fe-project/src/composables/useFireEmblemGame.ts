@@ -156,7 +156,7 @@ export function useFireEmblemGame() {
         statsArr.push("DEF: " + randomUnit.value.Def);
         statsArr.push("RES: " + randomUnit.value.Res);
         statsArr.push("CON: " + randomUnit.value.Con);
-        cluesARR.value.push(statsArr.join("\n"));
+        cluesARR.value.push(statsArr.join(";"));
         break;
       case 3:
         cluesARR.value.push(randomUnit.value.Mov.toString());

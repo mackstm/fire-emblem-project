@@ -31,7 +31,20 @@
     <div class="text">
       <ul>
         <li v-for="(item, index) in cluesARR" :key="index">
-          {{ item }}
+          <!-- {{ item }} -->
+
+
+            <ul v-if="index == 1">
+              <li v-for="(item2, index2) in item.split(';')" :key="index2">
+                {{ item2 }}
+                <v-progress-circular
+                  color="deep-orange-lighten-2"
+                  model-value="80"
+                ></v-progress-circular>
+              </li>
+            </ul>
+
+            <p v-else>{{ item }}</p>
         </li>
       </ul>
     </div>
@@ -49,6 +62,7 @@ import { ref } from 'vue';
  * The user's input for guessing the Fire Emblem character.
  */
 const guess = ref('');
+const example = ref(50);
 
 /**
  * Submits the user's guess and resets the input field.
