@@ -1,7 +1,7 @@
 import fireEmblemApi from "@/modules/fecharacters/api/fireEmblemApi";
 import type { FEListResponse, Unit } from "@/modules/fecharacters/interfaces/fe-list.response";
 import { GameStatus } from "@/modules/fecharacters/interfaces/game-status.enum";
-import { computed, onActivated, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 /**
  * Composable for managing the Fire Emblem game logic.
@@ -63,13 +63,13 @@ export function useFireEmblemGame() {
    */
   const randomUnit = computed(() => {
     if (unitList.value[randomIndex.value].Name.match(/[’]/)) {
-      let helpMe: string[] = unitList.value[randomIndex.value].Name.split("’");
+      const aux: string[] = unitList.value[randomIndex.value].Name.split("’");
       let newName = "";
-      for (let i = 0; i < helpMe.length; i++) {
-        if (i == helpMe.length - 1) {
-          newName += helpMe[i];
+      for (let i = 0; i < aux.length; i++) {
+        if (i == aux.length - 1) {
+          newName += aux[i];
         } else {
-          newName += helpMe[i] + "'";
+          newName += aux[i] + "'";
         }
       }
       unitList.value[randomIndex.value].Name = newName;
@@ -83,7 +83,7 @@ export function useFireEmblemGame() {
    */
   const getFECharacter = async () => {
     const response = await fireEmblemApi.get<FEListResponse>();
-    let unitArray: Unit[] = response.data.units;
+    const unitArray: Unit[] = response.data.units;
     console.log(unitArray[0].Name);
     return unitArray;
   };
@@ -146,18 +146,19 @@ export function useFireEmblemGame() {
       case 1:
         cluesARR.value.push(randomUnit.value.Affin);
         break;
-      case 2:
-        let statsArr: string[] = [];
-        statsArr.push("HP: " + randomUnit.value.HP);
-        statsArr.push("STR: " + randomUnit.value.Str);
-        statsArr.push("SKL: " + randomUnit.value.Skl);
-        statsArr.push("SPD: " + randomUnit.value.Spd);
-        statsArr.push("LCK: " + randomUnit.value.Lck);
-        statsArr.push("DEF: " + randomUnit.value.Def);
-        statsArr.push("RES: " + randomUnit.value.Res);
-        statsArr.push("CON: " + randomUnit.value.Con);
-        cluesARR.value.push(JSON.stringify(statsArr));
-        break;
+      case 2: {
+          const stats: string[] = [];
+          stats.push("HP: " + randomUnit.value.HP);
+          stats.push("STR: " + randomUnit.value.Str);
+          stats.push("SKL: " + randomUnit.value.Skl);
+          stats.push("SPD: " + randomUnit.value.Spd);
+          stats.push("LCK: " + randomUnit.value.Lck);
+          stats.push("DEF: " + randomUnit.value.Def);
+          stats.push("RES: " + randomUnit.value.Res);
+          stats.push("CON: " + randomUnit.value.Con);
+          cluesARR.value.push(JSON.stringify(stats));
+          break;
+        }
       case 3:
         cluesARR.value.push(randomUnit.value.Mov.toString());
         break;

@@ -3,6 +3,23 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "build": {
+    "appId": "com.feapp.electron",
+    "productName": "feapp",
+    "files": [
+      "dist/**/*",
+      "electron/main.ts"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "FEImage"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -11,7 +28,9 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "electron:dev": "electron ./electron/main.ts",
+    "electron:build": "tsc -p electron && electron-builder"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -20,9 +39,11 @@
     "vuetify": "^3.7.12"
   },
   "devDependencies": {
+    "@electron/remote": "^2.1.2",
+    "@eslint/js": "^9.20.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.13.4",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/eslint-plugin": "1.1.25",
     "@vue/eslint-config-prettier": "^10.1.0",
@@ -30,8 +51,11 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.18.0",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.15.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.0.0",
     "npm-run-all2": "^7.0.2",
@@ -39,6 +63,7 @@
     "prettier": "^3.4.2",
     "tailwindcss": "^4.0.6",
     "typescript": "~5.7.3",
+    "typescript-eslint": "^8.24.1",
     "vite": "^6.0.11",
     "vite-plugin-vue-devtools": "^7.7.0",
     "vitest": "^3.0.2",

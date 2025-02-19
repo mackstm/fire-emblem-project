@@ -30,7 +30,7 @@
 
     <div class="text">
       <ul>
-        <li v-for="item in cluesARR">
+        <li v-for="(item, index) in cluesARR" :key="index">
           {{ item }}
         </li>
       </ul>
