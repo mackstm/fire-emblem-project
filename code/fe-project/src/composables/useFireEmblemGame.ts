@@ -176,8 +176,26 @@ export function useFireEmblemGame() {
    * Restarts the game by resetting counters and selecting a new random unit.
    */
   const restartGame = async () => {
+    // if(unitList.value.length == 0){
+    //   console.log("sin prrsonajes");
+    //   return;
+    // }
+
     gameStatus.value = GameStatus.Playing;
+    // unitList.value.splice(randomIndex.value, 1);
+    const previousIndex = randomIndex.value;
     randomIndex.value = Math.floor(Math.random() * unitList.value.length);
+
+    let sameCharacter = true;
+
+    while(sameCharacter) {
+      if(previousIndex != randomIndex.value){
+        sameCharacter = false;
+      } else {
+        randomIndex.value = Math.floor(Math.random() * unitList.value.length);
+      }
+    }
+
     cluesARR.value = [];
     cluesCounter.value = 0;
     errorCounter.value = 0;
