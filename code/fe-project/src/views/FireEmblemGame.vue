@@ -6,20 +6,20 @@
   <section class="flex flex-col justify-center items-center w-screen md:h-screen" v-else>
     <img class="mt-4 md:mt-0" src="../../images/assets/fe8-logo.png" alt="logo" >
 
-    <div class="mt-2 mb-2" v-if="gameStatus === GameStatus.Playing">
+
       <v-progress-linear
       color="success"
-      :model-value="calcErrorsForBar"
-      size="50"
-      width="20"
-      height="20"
+      :model-value="calcErrorsForBar()"
+      height="10"
+      width="5"
       striped
+      rounded
       bg-color="#7d7d7d"
+      v-if="gameStatus === GameStatus.Playing"
       >
 
       </v-progress-linear>
 
-    </div>
       <h3 class="mt-2 font-bold text-[20px] mb-2" v-else>
         INTÉNTALO DE NUEVO:  {{restartCounter}}
       </h3>
@@ -143,6 +143,7 @@ import { ref } from 'vue';
  * The user's input for guessing the Fire Emblem character.
  */
 const guess = ref('');
+const errorAux = ref(8);
 
 
 const calcStatForBar = (stat: string[]) => {
@@ -198,6 +199,7 @@ const {
 
 
 <style scoped>
+
 
 .my-outline {
   text-shadow:
