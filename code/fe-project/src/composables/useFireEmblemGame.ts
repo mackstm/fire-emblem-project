@@ -1,7 +1,7 @@
 import fireEmblemApi from "@/modules/fecharacters/api/fireEmblemApi";
 import type { FEListResponse, Unit } from "@/modules/fecharacters/interfaces/fe-list.response";
 import { GameStatus } from "@/modules/fecharacters/interfaces/game-status.enum";
-import { computed, onActivated, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 /**
  * Composable for managing the Fire Emblem game logic.
@@ -83,7 +83,7 @@ export function useFireEmblemGame() {
    */
   const getFECharacter = async () => {
     const response = await fireEmblemApi.get<FEListResponse>();
-    let unitArray: Unit[] = response.data.units;
+    const unitArray: Unit[] = response.data.units;
     console.log(unitArray[0].Name);
     return unitArray;
   };
