@@ -148,22 +148,22 @@ export function useFireEmblemGame() {
   const selectClue = () => {
     switch (cluesCounter.value) {
       case 1:
-        cluesARR.value.push("Afinidad: " + randomUnit.value.Affin);
+        cluesARR.value.push("AFINIDAD: " + randomUnit.value.Affin);
         break;
       case 2:
         let statsArr: string[] = [];
-        statsArr.push("HP: " + randomUnit.value.HP);
-        statsArr.push("ATK: " + randomUnit.value.Str);
-        statsArr.push("SKL: " + randomUnit.value.Skl);
-        statsArr.push("SPD: " + randomUnit.value.Spd);
-        statsArr.push("LCK: " + randomUnit.value.Lck);
-        statsArr.push("DEF: " + randomUnit.value.Def);
-        statsArr.push("RES: " + randomUnit.value.Res);
-        statsArr.push("CON: " + randomUnit.value.Con);
+        statsArr.push("VIDA: " + randomUnit.value.HP);
+        statsArr.push("ATAQUE: " + randomUnit.value.Str);
+        statsArr.push("HABILIDAD: " + randomUnit.value.Skl);
+        statsArr.push("VELOCIDAD: " + randomUnit.value.Spd);
+        statsArr.push("SUERTE: " + randomUnit.value.Lck);
+        statsArr.push("DEFENSA: " + randomUnit.value.Def);
+        statsArr.push("RESISTENCIA: " + randomUnit.value.Res);
+        statsArr.push("CONSTITUCION: " + randomUnit.value.Con);
         cluesARR.value.push(statsArr.join(";"));
         break;
       case 3:
-        cluesARR.value.push("Movimiento: " + randomUnit.value.Mov.toString());
+        cluesARR.value.push("MOVIMIENTO: " + randomUnit.value.Mov.toString());
         break;
       case 4:
         cluesARR.value.push("LVL: " + randomUnit.value.Lv);
