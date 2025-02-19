@@ -20,7 +20,7 @@
 
     </div>
       <h3 class="mt-2 font-bold text-[20px] mb-2" v-else>
-       'INTÉNTALO DE NUEVO: ' + restartCounter
+        INTÉNTALO DE NUEVO:  {{restartCounter}}
       </h3>
 
     <div class="flex md:flex-row w-[40%] flex-wrap justify-evenly items-center">
