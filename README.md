@@ -1,7 +1,7 @@
 <div align="justify">
 
 # Adivina el personaje de Fire Emblem
-> 🖥️  **Desarrolladores:** Nabil L.A. ([@nalleon](https://github.com/nalleon)) y José Maximiliano M. A. ([@mackstm](https://github.com/mackstm)) 
+> 🖥️  **Desarrolladores:** Nabil L.A. ([@nalleon](https://github.com/nalleon)) y José Maximiliano B. M. ([@mackstm](https://github.com/mackstm)) 
 
 <div align="center">
     <img src="./img/cover.png">
