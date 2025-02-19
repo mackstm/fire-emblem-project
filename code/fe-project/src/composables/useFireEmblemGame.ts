@@ -108,6 +108,10 @@ export function useFireEmblemGame() {
    * @param {string} name - The player's guessed unit name.
    */
   const checkAnswer = (name: string) => {
+    if(name.trim().length <= 0){
+      return;
+    }
+
     if (errorCounter.value >= maxError.value) {
       gameStatus.value = GameStatus.Lost;
       startCounter();
