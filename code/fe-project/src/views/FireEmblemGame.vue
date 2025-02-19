@@ -1,28 +1,10 @@
 <template>
-  <section class="flex flex-col justify-center items-center w-screen h-screen" v-if="isLoading">
+  <section class="flex flex-col justify-center items-center w-screen lg:h-screen" v-if="isLoading">
     <h1 class="text-3xl">Espere por favor</h1>
     <h3 class="animate-pulse">Cargando personajes</h3>
   </section>
-  <section class="flex flex-col justify-center items-center w-screen md:h-screen" v-else>
+  <section class="flex flex-col justify-center items-center w-screen lg:h-screen" v-else>
     <img class="mt-4 md:mt-0" src="../../images/assets/fe8-logo.png" alt="logo" >
-
-
-      <v-progress-linear
-      color="success"
-      :model-value="calcErrorsForBar()"
-      height="10"
-      width="5"
-      striped
-      rounded
-      bg-color="#7d7d7d"
-      v-if="gameStatus === GameStatus.Playing"
-      >
-
-      </v-progress-linear>
-
-      <h3 class="mt-2 font-bold text-[20px] mb-2" v-else>
-        INTÉNTALO DE NUEVO:  {{restartCounter}}
-      </h3>
 
     <div class="flex md:flex-row w-[40%] flex-wrap justify-evenly items-center">
       <div class="flex flex-col items-center order-first">
@@ -125,7 +107,21 @@
 
 
 
+    <v-progress-linear
+      color="success"
+      :model-value="calcErrorsForBar()"
+      height="20"
+      striped
+      rounded
+      bg-color="#7d7d7d"
+      v-if="gameStatus === GameStatus.Playing"
+      >
 
+      </v-progress-linear>
+
+      <h3 class="mt-2 font-bold text-[20px] mb-2" v-else>
+        INTÉNTALO DE NUEVO:  {{restartCounter}}
+      </h3>
 
 
 
