@@ -5,17 +5,27 @@
   </section>
   <section v-else>
     <img src="../../images/assets/fe8-logo.png" alt="logo" >
-    <h3 class="mt-2">
-          {{ gameStatus === GameStatus.Playing ? 'Jugando...' : 'Intentalo de nuevo en: ' + restartCounter }}
+    <h3 class="mt-2 font-bold text-[20px] mb-2">
+          {{ gameStatus === GameStatus.Playing ? 'JUGANDO...' : 'INTÉNTALO DE NUEVO: ' + restartCounter }}
     </h3>
 
     <div class="flex flex-col md:flex-row w-[65%] justify-evenly items-center">
       <div class="flex flex-col items-center">
 
 
-          <h3 class="mb-3" v-if="gameStatus !== GameStatus.Playing">
-          {{
-            randomUnit.Name.toLocaleUpperCase()}}
+          <h3 class="mb-3 font-bold text-[25px]" v-if="gameStatus !== GameStatus.Playing">
+          <span v-if="gameStatus == GameStatus.Won" class="text-green-500">
+            {{
+              randomUnit.Name.toLocaleUpperCase()
+            }}
+          </span>
+
+          <span v-else class="text-red-500">
+            {{
+              randomUnit.Name.toLocaleUpperCase()
+            }}
+          </span>
+
           </h3>
           <FireEmblemPicture :unitName="randomUnit.Name.toLowerCase()"
           :showUnit="gameStatus !== GameStatus.Playing"/>
@@ -26,7 +36,7 @@
       </div>
 
 
-      <v-card class="bg-black mb-4" elevation="16" max-width="344" min-height="38rem">
+      <v-card class="bg-black mb-4" elevation="16" min-width="300" max-width="400" min-height="38rem">
         <v-card-item>
           <v-card-title> Pistas </v-card-title>
           <v-card-subtitle> Acerca del personaje... </v-card-subtitle>
@@ -62,6 +72,9 @@
 
     </div>
 
+    <div class="text-sm mb-2 font-bold">
+      VICTORIAS: {{ winCount }}
+    </div>
 
       <form class="flex flex-row justify-center items-center" @submit.prevent="sendAnswer">
           <!-- <input class="bg-white h-[10px]" v-if="gameStatus != GameStatus.Playing"type="text"  placeholder="Escribe aquí" disabled />
@@ -97,9 +110,7 @@
 
 
 
-    <div class="text-sm mt-2">
-      Victorias: {{ winCount }}
-    </div>
+
 
   </section>
 </template>

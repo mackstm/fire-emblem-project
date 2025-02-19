@@ -1,6 +1,7 @@
 import fireEmblemApi from "@/modules/fecharacters/api/fireEmblemApi";
 import type { FEListResponse, Unit } from "@/modules/fecharacters/interfaces/fe-list.response";
 import { GameStatus } from "@/modules/fecharacters/interfaces/game-status.enum";
+import confetti from "canvas-confetti";
 import { computed, onMounted, ref } from "vue";
 
 /**
@@ -123,11 +124,12 @@ export function useFireEmblemGame() {
 
     if (name.toLowerCase() === randomUnit.value.Name.toLowerCase()) {
       gameStatus.value = GameStatus.Won;
-      // confetti({
-      //   particleCount: 300,
-      //   spread: 150,
-      //   origin: { y: 0.6 }
-      // });
+      confetti({
+        particleCount: 100,
+        spread: 300,
+        origin: { y: 0.6 },
+        ticks: 100
+      });
       winCount.value++;
 
       startCounter();
