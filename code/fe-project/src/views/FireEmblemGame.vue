@@ -1,19 +1,19 @@
 <template>
-  <section v-if="isLoading">
+  <section class="flex flex-col justify-center items-center w-screen h-screen" v-if="isLoading">
     <h1 class="text-3xl">Espere por favor</h1>
     <h3 class="animate-pulse">Cargando personajes</h3>
   </section>
-  <section v-else>
-    <img src="../../images/assets/fe8-logo.png" alt="logo" >
+  <section class="flex flex-col justify-center items-center w-screen md:h-screen" v-else>
+    <img class="mt-4 md:mt-0" src="../../images/assets/fe8-logo.png" alt="logo" >
     <h3 class="mt-2 font-bold text-[20px] mb-2">
           {{ gameStatus === GameStatus.Playing ? 'JUGANDO...' : 'INTÉNTALO DE NUEVO: ' + restartCounter }}
     </h3>
 
-    <div class="flex flex-col md:flex-row w-[65%] justify-evenly items-center">
+    <div class="md:flex md:flex-row w-[65%] justify-evenly items-center">
       <div class="flex flex-col items-center">
 
 
-          <h3 class="mb-3 font-bold text-[25px]" v-if="gameStatus !== GameStatus.Playing">
+          <h3 class="mb-3 font-bold text-[25px] my-outline" v-if="gameStatus !== GameStatus.Playing">
           <span v-if="gameStatus == GameStatus.Won" class="text-green-500">
             {{
               randomUnit.Name.toLocaleUpperCase()
@@ -36,7 +36,7 @@
       </div>
 
 
-      <v-card class="bg-black mb-4" elevation="16" min-width="300" max-width="400" min-height="38rem">
+      <v-card class="bg-black mb-4 md:h-[38rem]" elevation="16" min-width="300" max-width="400" >
         <v-card-item>
           <v-card-title> Pistas </v-card-title>
           <v-card-subtitle> Acerca del personaje... </v-card-subtitle>
@@ -127,7 +127,7 @@ import { ref } from 'vue';
 const guess = ref('');
 
 const calcStatForBar = (stat: string[]) => {
-  if (stat[0] == 'HP') {
+  if (stat[0] == 'VIDA') {
     return parseInt(stat[1].trim()) * 100 / 50;
   }
 
@@ -172,9 +172,13 @@ const {
 
 <style scoped>
 
-section {
-  @apply flex flex-col justify-center items-center w-screen h-screen
-}
+.my-outline {
+  text-shadow:
+   -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+     1px 1px 0 #fff;
 
+}
 </style>
 
