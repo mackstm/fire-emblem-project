@@ -222,6 +222,7 @@ export function useFireEmblemGame() {
     winCount,
     restartCounter,
     cluesARR,
+    errorCounter,
 
     // Methods
     checkAnswer,

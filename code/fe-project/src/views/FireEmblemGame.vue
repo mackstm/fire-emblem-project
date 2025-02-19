@@ -5,8 +5,17 @@
   </section>
   <section class="flex flex-col justify-center items-center w-screen md:h-screen" v-else>
     <img class="mt-4 md:mt-0" src="../../images/assets/fe8-logo.png" alt="logo" >
-    <h3 class="mt-2 font-bold text-[20px] mb-2">
-          {{ gameStatus === GameStatus.Playing ? 'JUGANDO...' : 'INTÉNTALO DE NUEVO: ' + restartCounter }}
+
+    <div class="mt-2 mb-2" v-if="gameStatus === GameStatus.Playing">
+      <v-progress-linear color="purple" v-model="errorCounter"
+          
+            :buffer-value="calcErrorsForBar()">
+        
+      </v-progress-linear>
+      
+    </div>
+      <h3 class="mt-2 font-bold text-[20px] mb-2" v-else>
+      {{ gameStatus !== GameStatus.Playing && 'INTÉNTALO DE NUEVO: ' + restartCounter }}
     </h3>
 
     <div class="md:flex md:flex-row w-[65%] justify-evenly items-center">
@@ -134,6 +143,10 @@ const calcStatForBar = (stat: string[]) => {
   return parseInt(stat[1].trim()) * 100 / 20;
 }
 
+const calcErrorsForBar = () => {
+  return parseInt(errorCounter * 100 / 8);
+}
+
 /**
  * Submits the user's guess and resets the input field.
  */
@@ -165,7 +178,11 @@ const {
   cluesARR,
 
   /** Function to check if the player's guess is correct. */
-  checkAnswer
+  checkAnswer,
+
+  /** The player's error counter . */
+  errorCounter
+
 } = useFireEmblemGame();
 </script>
 
