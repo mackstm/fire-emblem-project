@@ -1,14 +1,18 @@
 {
+  "main": "electron/main.js",
   "name": "fe-project",
   "version": "0.0.0",
+  "description": "Fire Emblem App built with Vue and Electron",
+  "author": "Nabil Leon Alvarez & Jose Maximiliano Boada Martin",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "build": {
     "appId": "com.feapp.electron",
     "productName": "feapp",
     "files": [
       "dist/**/*",
-      "electron/main.ts"
+      "electron/main.js",
+      "package.json"
     ],
     "mac": {
       "target": "dmg"
@@ -17,7 +21,7 @@
       "target": "nsis"
     },
     "linux": {
-      "target": "FEImage"
+      "target": "appimage"
     }
   },
   "scripts": {
@@ -30,10 +34,10 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "electron:dev": "electron ./electron/main.ts",
-    "electron:build": "tsc -p electron && electron-builder"
+    "electron:build": "tsc electron/main.ts && electron-builder"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.6",
+    "@tailwindcss/vite": "^4.0.7",
     "axios": "^1.7.9",
     "vue": "^3.5.13",
     "vuetify": "^3.7.12"
@@ -61,7 +65,7 @@
     "npm-run-all2": "^7.0.2",
     "postcss": "^8.5.2",
     "prettier": "^3.4.2",
-    "tailwindcss": "^4.0.6",
+    "tailwindcss": "^4.0.7",
     "typescript": "~5.7.3",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.0.11",
