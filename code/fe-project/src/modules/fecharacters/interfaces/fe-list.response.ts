@@ -1,7 +1,14 @@
+
+/**
+ * Interface for the list of units
+ */
 export interface FEListResponse {
   units: Unit[];
 }
 
+/**
+ * Interface for the unit
+ */
 export interface Unit {
   Name: string;
   Lv: number;
@@ -19,6 +26,10 @@ export interface Unit {
   Affin: string;
 }
 
+
+/**
+ * Interface for the weapons of the unit
+ */
 export interface WeaponRank {
   Weapon: string;
   Rank: null | string;

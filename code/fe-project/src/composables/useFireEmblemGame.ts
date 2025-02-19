@@ -3,19 +3,64 @@ import type { FEListResponse, Unit } from "@/modules/fecharacters/interfaces/fe-
 import { GameStatus } from "@/modules/fecharacters/interfaces/game-status.enum";
 import { computed, onActivated, onMounted, reactive, ref } from "vue";
 
+/**
+ * Composable for managing the Fire Emblem game logic.
+ */
 export function useFireEmblemGame() {
+  /**
+   * Represents the current game status (Playing, Won, Lost).
+   */
   const gameStatus = ref<GameStatus>(GameStatus.Playing);
+
+  /**
+   * List of all Fire Emblem units retrieved from the API.
+   */
   const unitList = ref<Unit[]>([]);
+
+  /**
+   * The number of times the player has won.
+   */
   const winCount = ref(0);
+
+  /**
+   * Countdown timer before restarting the game.
+   */
   const restartCounter = ref(0);
+
+  /**
+   * Index of the randomly selected unit in the unit list.
+   */
   const randomIndex = ref(0);
+
+  /**
+   * Array storing the hints given to the player.
+   */
   const cluesARR = ref<string[]>([]);
+
+  /**
+   * Maximum number of incorrect guesses allowed before losing.
+   */
   const maxError = ref(8);
+
+  /**
+   * Tracks the number of incorrect guesses made by the player.
+   */
   const errorCounter = ref(0);
+
+  /**
+   * Tracks the number of hints given to the player.
+   */
   const cluesCounter = ref(0);
 
+  /**
+   * Determines if the game is still loading (i.e., waiting for unit data).
+   */
   const isLoading = computed(() => unitList.value.length === 0);
 
+  /**
+   * Retrieves a random unit from the unit list.
+   * Ensures special characters in names are properly formatted.
+   */
   const randomUnit = computed(() => {
     if (unitList.value[randomIndex.value].Name.match(/[’]/)) {
       let helpMe: string[] = unitList.value[randomIndex.value].Name.split("’");
@@ -30,16 +75,22 @@ export function useFireEmblemGame() {
       unitList.value[randomIndex.value].Name = newName;
     }
     return unitList.value[randomIndex.value];
-  })
+  });
 
+  /**
+   * Fetches Fire Emblem character data from the API.
+   * @returns {Promise<Unit[]>} A promise resolving to an array of unit objects.
+   */
   const getFECharacter = async () => {
     const response = await fireEmblemApi.get<FEListResponse>();
-    let unitArray: Unit[]= response.data.units;
+    let unitArray: Unit[] = response.data.units;
     console.log(unitArray[0].Name);
     return unitArray;
-  }
+  };
 
-
+  /**
+   * Starts a countdown timer before restarting the game.
+   */
   const startCounter = () => {
     restartCounter.value = 5;
     const timer = setInterval(() => {
@@ -48,52 +99,55 @@ export function useFireEmblemGame() {
         clearInterval(timer);
       }
     }, 1000);
-  }
+  };
 
+  /**
+   * Checks if the player's guess is correct.
+   * If incorrect, increments the error counter and provides hints.
+   * If the maximum number of errors is reached, the game is lost.
+   * @param {string} name - The player's guessed unit name.
+   */
   const checkAnswer = (name: string) => {
-    if(errorCounter.value >= maxError.value ) {
+    if (errorCounter.value >= maxError.value) {
       gameStatus.value = GameStatus.Lost;
-
       startCounter();
-
       setTimeout(() => {
         restartGame();
       }, 5000);
       return;
     }
 
-
-
     if (name.toLowerCase() === randomUnit.value.Name.toLowerCase()) {
       gameStatus.value = GameStatus.Won;
-        // confetti({
-        //   particleCount: 300,
-        //   spread: 150,
-        //   origin: { y: 0.6 }
-        // });
-        winCount.value++;
+      // confetti({
+      //   particleCount: 300,
+      //   spread: 150,
+      //   origin: { y: 0.6 }
+      // });
+      winCount.value++;
 
-        startCounter();
+      startCounter();
 
-        setTimeout(() => {
-          restartGame();
-        }, 5000);
-      } else {
-        cluesCounter.value++;
-        errorCounter.value++;
-        selectClue();
-      }
+      setTimeout(() => {
+        restartGame();
+      }, 5000);
+    } else {
+      cluesCounter.value++;
+      errorCounter.value++;
+      selectClue();
+    }
+  };
 
-
-  }
-
-  const selectClue = () =>{
+  /**
+   * Provides hints based on the number of incorrect attempts.
+   */
+  const selectClue = () => {
     switch (cluesCounter.value) {
       case 1:
         cluesARR.value.push(randomUnit.value.Affin);
         break;
       case 2:
-        let statsArr : string[] = [];
+        let statsArr: string[] = [];
         statsArr.push("HP: " + randomUnit.value.HP);
         statsArr.push("STR: " + randomUnit.value.Str);
         statsArr.push("SKL: " + randomUnit.value.Skl);
@@ -107,31 +161,35 @@ export function useFireEmblemGame() {
       case 3:
         cluesARR.value.push(randomUnit.value.Mov.toString());
         break;
-
       case 4:
         cluesARR.value.push("LVL: " + randomUnit.value.Lv);
-      break;
-
+        break;
       case 5:
         cluesARR.value.push(randomUnit.value.Class);
         break;
       default:
         break;
     }
-  }
+  };
 
+  /**
+   * Restarts the game by resetting counters and selecting a new random unit.
+   */
   const restartGame = async () => {
     gameStatus.value = GameStatus.Playing;
     randomIndex.value = Math.floor(Math.random() * unitList.value.length);
     cluesARR.value = [];
     cluesCounter.value = 0;
     errorCounter.value = 0;
-  }
+  };
 
+  /**
+   * Lifecycle hook: Fetches Fire Emblem characters when the component is mounted.
+   */
   onMounted(async () => {
     unitList.value = await getFECharacter();
-    randomIndex.value = Math.floor(Math.random() * unitList.value.length)
-  })
+    randomIndex.value = Math.floor(Math.random() * unitList.value.length);
+  });
 
   return {
     gameStatus,
@@ -141,7 +199,7 @@ export function useFireEmblemGame() {
     restartCounter,
     cluesARR,
 
-    //methods
-    checkAnswer
-  }
+    // Methods
+    checkAnswer,
+  };
 }

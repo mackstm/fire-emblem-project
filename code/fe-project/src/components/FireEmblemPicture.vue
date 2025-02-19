@@ -8,20 +8,38 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-  interface Props {
-    unitName: string;
-    showUnit?: boolean;
-  }
-  const props = withDefaults(defineProps<Props>(), {
-    showUnit: false
-  });
 
-  const unitImage = computed(() =>
-    `../../images/${props.unitName}.png`
-  );
-  console.log(props.unitName);
+/**
+ * Props interface for the FireEmblemPicture component.
+ */
+interface Props {
+  /**
+   * The name of the unit to display in the image.
+   */
+  unitName: string;
 
+  /**
+   * Determines whether the unit should be displayed.
+   * @default false
+   */
+  showUnit?: boolean;
+}
+
+/**
+ * Component props with default values.
+ */
+const props = withDefaults(defineProps<Props>(), {
+  showUnit: false,
+});
+
+/**
+ * Computes the image path based on the unit's name.
+ */
+const unitImage = computed(() => `../../images/${props.unitName}.png`);
+
+console.log(props.unitName);
 </script>
+
 
 <style scoped>
 

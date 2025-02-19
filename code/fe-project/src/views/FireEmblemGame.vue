@@ -11,7 +11,8 @@
     </h3>
 
     <h3 class="mt-2" v-if="gameStatus !== GameStatus.Playing">
-      {{ randomUnit.Name.toLocaleUpperCase()}}
+      {{ 
+        randomUnit.Name.toLocaleUpperCase()}}
     </h3>
     <FireEmblemPicture :unitName="randomUnit.Name.toLowerCase()"
     :showUnit="gameStatus !== GameStatus.Playing"/>
@@ -44,21 +45,46 @@ import FireEmblemPicture from '@/components/FireEmblemPicture.vue';
 import { GameStatus } from '../modules/fecharacters/interfaces/game-status.enum';
 import { ref } from 'vue';
 
+/**
+ * The user's input for guessing the Fire Emblem character.
+ */
 const guess = ref('');
 
+/**
+ * Submits the user's guess and resets the input field.
+ */
 const sendAnswer = () => {
   checkAnswer(guess.value);
   guess.value = "";
-}
+};
 
-const { gameStatus,
-    isLoading,
-    randomUnit,
-    winCount,
-    restartCounter, cluesARR,
-    checkAnswer } = useFireEmblemGame();
+/**
+ * Destructured properties from the Fire Emblem game composable.
+ */
+const { 
+  /** The current status of the game (e.g., playing, won, lost). */
+  gameStatus,
 
+  /** Indicates whether the game is loading. */
+  isLoading,
+
+  /** The randomly selected Fire Emblem unit for the current round. */
+  randomUnit,
+
+  /** The player's win count. */
+  winCount,
+
+  /** Resets the game counter. */
+  restartCounter,
+
+  /** Array of clues available for the player. */
+  cluesARR,
+
+  /** Function to check if the player's guess is correct. */
+  checkAnswer 
+} = useFireEmblemGame();
 </script>
+
 
 <style scoped>
 
