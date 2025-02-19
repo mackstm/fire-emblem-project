@@ -169,7 +169,7 @@ export function useFireEmblemGame() {
         cluesARR.value.push("LVL: " + randomUnit.value.Lv);
         break;
       case 5:
-        cluesARR.value.push("Clase: " + randomUnit.value.Class);
+        cluesARR.value.push("CLASE: " + randomUnit.value.Class);
         break;
       default:
         break;
